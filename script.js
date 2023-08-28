@@ -1,52 +1,40 @@
 let computerScore = 0;
 let playerScore = 0;
-
+let choices = ["rock", "paper", "scissors"];
 
 // Randomly returns either ‘Rock’, ‘Paper’ or ‘Scissors’ for the computer.
 function getComputerChoice() {
-    const computerSelection = Math.floor(Math.random() * 3);
-    if (computerSelection === 0) {
-        return "rock";
-    } if (computerSelection === 1) {
-        return "paper";
-    } if (computerSelection === 2) {
-        return "scissors";
-    }
+    return choices[Math.floor(Math.random() * 3)];
 }
 
 function playRound(playerSelection, computerSelection) {
 
     computerSelection = getComputerChoice();
-
+    resultString = "";
+    
     if (playerSelection === computerSelection) {
-        document.getElementById("playerScore").innerHTML = "You: " + playerScore;
-        document.getElementById("computerScore").innerHTML = "Computer: " + computerScore;
-        document.getElementById("result").innerHTML = "Tie!";
+        resultString = "Tie!";
     }
     else if (playerSelection === "rock" && computerSelection === "scissors") {
         playerScore += 1;
-        document.getElementById("playerScore").innerHTML = "You: " + playerScore;
-        document.getElementById("computerScore").innerHTML = "Computer: " + computerScore;
-        document.getElementById("result").innerHTML = "You win! Rock beats scissors!";
+        resultString = "You win! Rock beats scissors!";
     }
     else if (playerSelection === "paper" && computerSelection === "rock") {
         playerScore += 1;
-        document.getElementById("playerScore").innerHTML = "You: " + playerScore;
-        document.getElementById("computerScore").innerHTML = "Computer: " + computerScore;
-        document.getElementById("result").innerHTML = "You win. Paper beats rock!";
+        resultString = "You win. Paper beats rock!";
     }
     else if (playerSelection === "scissors" && computerSelection === "paper") {
         playerScore += 1;
-        document.getElementById("playerScore").innerHTML = "You: " + playerScore;
-        document.getElementById("computerScore").innerHTML = "Computer: " + computerScore;
-        document.getElementById("result").innerHTML = "You win. Scissors beats paper!";
+        resultString = "You win. Scissors beats paper!";
     }
     else {
-       computerScore += 1
-       document.getElementById("playerScore").innerHTML = "You: " + playerScore;
-       document.getElementById("computerScore").innerHTML = "Computer: " + computerScore;
-       document.getElementById("result").innerHTML = "You lose. The computer chose " + computerSelection + ".";
+       computerScore += 1;
+       resultString = "You lose. The computer chose " + computerSelection + ".";
     }
+
+    document.getElementById("playerScore").innerHTML = "You: " + playerScore;
+    document.getElementById("computerScore").innerHTML = "Computer: " + computerScore;
+    document.getElementById("result").innerHTML = resultString;
 
     if (playerScore === 5 || computerScore === 5) {
         gameEnd();
